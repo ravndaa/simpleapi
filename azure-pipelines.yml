@@ -36,6 +36,6 @@ steps:
   inputs:
     command: publish
     publishDirectory: '$(Build.ArtifactStagingDirectory)'
-    vstsFeedPublish: 'builddotnet/Release'
+    vstsFeedPublish: 'builddotnet/Releases'
     vstsFeedPackagePublish: 'myWebsiteName'
     packagePublishDescription: 'always latest'
