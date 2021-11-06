@@ -21,13 +21,13 @@ steps:
   inputs:
     command: publish
     publishWebProjects: True
-    arguments: '-c Release -r linux-x64 --self-contained true --output $(Build.ArtifactStagingDirectory)'
+    arguments: '-c Release -r linux-x64 --self-contained true --output $(Build.ArtifactStagingDirectory)/app/'
     zipAfterPublish: True
 
 # this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    targetPath: '$(Build.ArtifactStagingDirectory)/app/' 
     artifactName: 'myWebsiteName'
 
 # Publish a Universal Package
@@ -35,7 +35,7 @@ steps:
   displayName: Universal Publish
   inputs:
     command: publish
-    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)/app/'
     vstsFeedPublish: 'builddotnet/Releases'
     vstsFeedPackagePublish: 'mywebsitename'
     packagePublishDescription: 'alwayslatest'
