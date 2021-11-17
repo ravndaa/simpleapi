@@ -22,3 +22,16 @@ az artifacts universal download \
 
 ## Run:
 caddy run --config Caddyfile
+
+
+
+
+
+## PODMAN
+test api: docker.io/containous/whoami:latest
+
+podman pull docker.io/library/caddy
+
+podman pod create -n myapi -p 8080:8080
+podman run -dt --name api --restart unless-stopped --pod myapi docker.io/traefik/whoami:latest
+podman run -dt --name proxy --restart unless-stopped --pod myapi docker.io/library/caddy:latest caddy reverse-proxy --from :8080 --to api:80
